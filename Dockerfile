@@ -1,15 +1,13 @@
-FROM openjdk:17-alpine
+FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Download Lavalink
+RUN apt update && apt install -y wget
+
 RUN wget -O Lavalink.jar "https://github.com/lavalink-devs/Lavalink/releases/download/4.0.0/Lavalink.jar"
 
-# Copy config file
 COPY application.yml .
 
-# Expose port
 EXPOSE 8080
 
-# Start Lavalink
 CMD ["java", "-jar", "Lavalink.jar"]
